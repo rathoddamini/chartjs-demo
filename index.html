@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Chart</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<h2>Sales Chart</h2>
+<canvas id="myChart"></canvas>
+
+<script>
+const ctx = document.getElementById('myChart');
+
+new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr'],
+    datasets: [{
+      label: 'Sales',
+      data: [10, 20, 15, 25]
+    }]
+  }
+});
+</script>
+
+</body>
+</html>
