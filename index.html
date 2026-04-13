@@ -1,25 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>My Chart</title>
+  <title>Scatter Chart</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
-<h2>Sales Chart</h2>
+<h2>Sales Scatter Chart</h2>
 <canvas id="myChart"></canvas>
 
 <script>
 const ctx = document.getElementById('myChart');
 
 new Chart(ctx, {
-  type: 'bar',
+  type: 'scatter',
   data: {
-    labels: ['Jan', 'Feb', 'Mar', 'Apr'],
     datasets: [{
       label: 'Sales',
-      data: [10, 20, 15, 25]
+      data: [
+        { x: 1, y: 10 },
+        { x: 2, y: 20 },
+        { x: 3, y: 15 },
+        { x: 4, y: 25 }
+      ],
+      backgroundColor: 'blue'
     }]
+  },
+  options: {
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: 'Month Index'
+        }
+      },
+      y: {
+        title: {
+          display: true,
+          text: 'Sales'
+        }
+      }
+    }
   }
 });
 </script>
