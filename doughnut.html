@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Doughnut Chart</title>
+
+  <!-- ✅ Required for Looker Studio Embed -->
+  <meta http-equiv="Content-Security-Policy" content="frame-ancestors *;">
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
+
+    .chart-container {
+      width: 100%;
+      height: 100vh;
+    }
+  </style>
+</head>
+<body>
+
+<div class="chart-container">
+  <canvas id="myChart"></canvas>
+</div>
+
+<script>
+const ctx = document.getElementById('myChart');
+
+// ✅ Sample Data (you can replace with BigQuery later)
+const data = {
+  labels: ['Basic Plan', 'Pro Plan', 'Enterprise'],
+  datasets: [{
+    label: 'Revenue Distribution',
+    data: [300, 500, 200],
+    backgroundColor: [
+      '#36A2EB',
+      '#FF6384',
+      '#FFCE56'
+    ],
+    borderWidth: 1
+  }]
+};
+
+// ✅ Doughnut Config
+const config = {
+  type: 'doughnut',
+  data: data,
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+
+    plugins: {
+      legend: {
+        position: 'bottom'
+      },
+      tooltip: {
+        enabled: true
+      }
+    },
+
+    cutout: '60%', // donut thickness
+
+    animation: {
+      animateRotate: true,
+      duration: 1000
+    }
+  }
+};
+
+// ✅ Create Chart
+const myChart = new Chart(ctx, config);
+
+// ✅ Fix resize inside iframe
+window.addEventListener('resize', () => {
+  myChart.resize();
+});
+</script>
+
+</body>
+</html>
