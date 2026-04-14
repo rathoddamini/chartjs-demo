@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bubble Chart</title>
+
+  <!-- ✅ Required for Looker Studio Embed -->
+  <meta http-equiv="Content-Security-Policy" content="frame-ancestors *;">
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
+
+    .chart-container {
+      width: 100%;
+      height: 100vh;
+    }
+  </style>
+</head>
+<body>
+
+<div class="chart-container">
+  <canvas id="myChart"></canvas>
+</div>
+
+<script>
+const ctx = document.getElementById('myChart');
+
+// ✅ Bubble Data (x, y, r)
+const data = {
+  datasets: [
+    {
+      label: 'Customers',
+      data: [
+        { x: 10, y: 20, r: 10 },
+        { x: 15, y: 10, r: 15 },
+        { x: 25, y: 30, r: 12 },
+        { x: 30, y: 25, r: 8 }
+      ],
+      backgroundColor: 'rgba(54, 162, 235, 0.5)'
+    }
+  ]
+};
+
+// ✅ Config
+const config = {
+  type: 'bubble',
+  data: data,
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+
+    plugins: {
+      legend: {
+        position: 'top'
+      },
+      tooltip: {
+        callbacks: {
+          label: function(context) {
+            const point = context.raw;
+            return `X: ${point.x}, Y: ${point.y}, Size: ${point.r}`;
+          }
+        }
+      }
+    },
+
+    scales: {
+      x: {
+        title: {
+          display: true,
+          text: 'X Value'
+        }
+      },
+      y: {
+        title: {
+          display: true,
+          text: 'Y Value'
+        }
+      }
+    },
+
+    animation: {
+      duration: 800
+    }
+  }
+};
+
+// ✅ Create Chart
+const myChart = new Chart(ctx, config);
+
+// ✅ Resize fix for iframe
+window.addEventListener('resize', () => {
+  myChart.resize();
+});
+</script>
+
+</body>
+</html>
